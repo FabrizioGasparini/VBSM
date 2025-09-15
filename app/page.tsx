@@ -64,7 +64,7 @@ export default function HomePage() {
                   className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105 bg-transparent"
                   asChild
                 >
-                  <Link href="/contatti">⚡ Prova Gratuita</Link>
+                  <Link href="/contatti">⚡ Vieni a Provare!</Link>
                 </Button>
               </div>
 
@@ -95,31 +95,31 @@ export default function HomePage() {
                   />
 
                   <div className="absolute -top-2 -right-2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-semibold shadow-lg animate-bounce">
-                    🏆 Serie C
+                    🏆 Dall'S3 alla Serie C
                   </div>
                   <div className="absolute -bottom-2 -left-2 bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm font-semibold shadow-lg animate-pulse">
-                    ⭐ 15 Trofei
+                    ⭐ 17 Squadre
                   </div>
                 </div>
               </div>
 
-              <div className="absolute top-1/4 -left-8 hidden lg:block">
+              <Link className="group hover:scale-105 transition-all duration-300 absolute top-1/4 -left-8 hidden lg:block" href="/allenamenti">
                 <div className="bg-background/90 backdrop-blur-sm rounded-lg p-3 shadow-lg border animate-float">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
                     <span className="text-sm font-medium">Allenamenti Attivi</span>
                   </div>
                 </div>
-              </div>
+              </Link>
 
-              <div className="absolute bottom-1/4 -right-8 hidden lg:block">
+              <Link className="group hover:scale-105 transition-all duration-300 absolute bottom-1/4 -right-8 hidden lg:block cursor-pointer" href="/calendario">
                 <div className="bg-background/90 backdrop-blur-sm rounded-lg p-3 shadow-lg border animate-float delay-1000">
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4 text-primary" />
                     <span className="text-sm font-medium">Prossima Partita</span>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -321,8 +321,8 @@ export default function HomePage() {
                   <div className="text-sm text-muted-foreground">Atleti</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-primary mb-2">15</div>
-                  <div className="text-sm text-muted-foreground">Trofei Vinti</div>
+                  <div className="text-3xl font-bold text-primary mb-2">19</div>
+                  <div className="text-sm text-muted-foreground">Allenatori</div>
                 </div>
               </div>
               <Button asChild>
@@ -406,7 +406,7 @@ export default function HomePage() {
               variant="outline"
               className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
             >
-              <Link href="/allenamenti">Prova Gratuita</Link>
+              <Link href="/allenamenti">Vieni a Provare!</Link>
             </Button>
           </div>
         </div>

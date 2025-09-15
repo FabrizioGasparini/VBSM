@@ -21,6 +21,8 @@ export default function AdminNewsPage() {
   const [isCreating, setIsCreating] = useState(false)
   const [message, setMessage] = useState("")
   const [tagsInput, setTagsInput] = useState("")
+  const [showNewCategoryInput, setShowNewCategoryInput] = useState(false)
+  const [newCategory, setNewCategory] = useState("")
 
   useEffect(() => {
     const savedArticles = loadFromStorage(STORAGE_KEYS.NEWS, newsData)
@@ -107,6 +109,12 @@ export default function AdminNewsPage() {
     setIsCreating(false)
     setEditingArticle(null)
     setFormData(emptyArticle)
+  }
+
+  const handleCategoryChange = (value: string) => {
+    setShowNewCategoryInput(value === "Nuova Categoria")
+    setNewCategory("")
+    setFormData({ ...formData, categoria: value })
   }
 
   const handleTagsChange = (tagsString: string) => {
@@ -218,7 +226,7 @@ export default function AdminNewsPage() {
                     <Label htmlFor="categoria">Categoria</Label>
                     <Select
                       value={formData.categoria}
-                      onValueChange={(value) => setFormData({ ...formData, categoria: value })}
+                      onValueChange={(value) => handleCategoryChange(value)}
                     >
                       <SelectTrigger>
                         <SelectValue />
@@ -229,8 +237,19 @@ export default function AdminNewsPage() {
                             {category}
                           </SelectItem>
                         ))}
+                        <SelectItem value="Nuova Categoria">Nuova Categoria</SelectItem>
                       </SelectContent>
                     </Select>
+                    {showNewCategoryInput && (
+                      <div>
+                        <Input
+                          value={newCategory}
+                          type="text"
+                          onChange={(e) => { setNewCategory(e.target.value);  setFormData({ ...formData, categoria: e.target.value }) }}
+                          placeholder="Inserisci nuova categoria"
+                          />
+                      </div>
+                    )}
                   </div>
 
                   <div>

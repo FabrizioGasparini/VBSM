@@ -225,22 +225,18 @@ export default function SquadrePage() {
             <h2 className="font-ethnocentric text-3xl lg:text-4xl mb-4 text-primary">STATISTICHE SQUADRE</h2>
             <p className="text-lg text-muted-foreground">I numeri che raccontano la nostra crescita</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">7</div>
+              <div className="text-4xl font-bold text-primary mb-2">17</div>
               <div className="text-sm text-muted-foreground">Squadre Attive</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">105</div>
+              <div className="text-4xl font-bold text-primary mb-2">220+</div>
               <div className="text-sm text-muted-foreground">Atleti Totali</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">12</div>
+              <div className="text-4xl font-bold text-primary mb-2">19</div>
               <div className="text-sm text-muted-foreground">Allenatori</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">8</div>
-              <div className="text-sm text-muted-foreground">Trofei Stagione</div>
             </div>
           </div>
         </div>

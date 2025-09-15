@@ -56,7 +56,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/admin" className="hover:text-volleyball-coral transition-colors">
+                <Link href="/admin" target="_blank" className="hover:text-volleyball-coral transition-colors">
                   Admin
                 </Link>
               </li>

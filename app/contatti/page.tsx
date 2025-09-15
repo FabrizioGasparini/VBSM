@@ -15,6 +15,14 @@ import { MapPin, Phone, Mail, Clock, Users, MessageSquare, Calendar, Dumbbell, S
 
 const contatti = [
   {
+    tipo: "Presidente",
+    nome: "Roberto Intonti",
+    telefono: "+39 0123 456792",
+    email: "presidente@volleysanmartino.it",
+    orari: "Su appuntamento",
+    icona: Calendar,
+  },
+  {
     tipo: "Segreteria Generale",
     nome: "Anna Verdi",
     telefono: "+39 0123 456789",
@@ -37,14 +45,6 @@ const contatti = [
     email: "senior@volleysanmartino.it",
     orari: "Lun-Mer-Ven: 19:00-21:00",
     icona: MessageSquare,
-  },
-  {
-    tipo: "Presidente",
-    nome: "Roberto Martinelli",
-    telefono: "+39 0123 456792",
-    email: "presidente@volleysanmartino.it",
-    orari: "Su appuntamento",
-    icona: Calendar,
   },
 ]
 
@@ -180,7 +180,7 @@ export default function ContattiPage() {
                       <SelectContent>
                         <SelectItem value="informazioni-generali">Informazioni Generali</SelectItem>
                         <SelectItem value="iscrizione-squadra">Iscrizione a una Squadra</SelectItem>
-                        <SelectItem value="prova-gratuita">Richiesta Prova Gratuita</SelectItem>
+                        <SelectItem value="prova">Richiesta Prova</SelectItem>
                         <SelectItem value="settore-giovanile">Settore Giovanile</SelectItem>
                         <SelectItem value="squadre-senior">Squadre Senior</SelectItem>
                         <SelectItem value="sponsorizzazioni">Sponsorizzazioni</SelectItem>
@@ -292,8 +292,8 @@ export default function ContattiPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Puoi contattare direttamente la segreteria o il responsabile del settore di tuo interesse. Offriamo
-                  sempre una prova gratuita per valutare il livello e trovare il gruppo più adatto.
+                  Puoi contattare direttamente la segreteria o il responsabile del settore di tuo interesse. Vieni in palestra
+                  a provare per valutare il tuo livello e trovare il gruppo più adatto a te.
                 </p>
               </CardContent>
             </Card>
@@ -303,7 +303,7 @@ export default function ContattiPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  I costi variano in base alla categoria e includono tessera federale, assicurazione e quota mensile.
+                  I costi variano in base alla categoria e includono tessera federale e assicurazione.
                   Contattaci per informazioni dettagliate sui prezzi delle singole squadre.
                 </p>
               </CardContent>

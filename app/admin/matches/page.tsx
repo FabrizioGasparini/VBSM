@@ -20,12 +20,15 @@ export default function AdminMatchesPage() {
   const [editingMatch, setEditingMatch] = useState<Match | null>(null)
   const [isCreating, setIsCreating] = useState(false)
   const [message, setMessage] = useState("")
-    const [activeTab, setActiveTab] = useState("all")
+  const [activeTab, setActiveTab] = useState("all")
+  
+  const [arbitriInput, setArbitriInput] = useState("")
     
-    const palestre = [
-        { nome: "Palestra Bombonera" },
-        { nome: "Palestra Scuole Medie" },
-        { nome: "Palestra Scuole Elementari" },
+    
+  const palestre = [
+    { nome: "Palestra Bombonera" },
+    { nome: "Palestra Scuole Medie" },
+    { nome: "Palestra Scuole Elementari" },
     ]
 
   useEffect(() => {
@@ -116,12 +119,14 @@ export default function AdminMatchesPage() {
     setFormData(emptyMatch)
   }
 
-  const handleArbitriChange = (arbitriString: string) => {
-    const arbitri = arbitriString
-      .split(",")
-      .map((arbitro) => arbitro.trim())
-      .filter((arbitro) => arbitro.length > 0)
-    setFormData({ ...formData, arbitri })
+    const handleArbitriChange = (arbitriString: string) => {
+    setArbitriInput(arbitriString)
+
+      const arbitri = arbitriString
+        .split(",")
+        .map((arbitro) => arbitro.trim())
+        .filter((arbitro) => arbitro.length > 0)
+      setFormData({ ...formData, arbitri })
   }
 
   const filteredMatches = matches.filter((match) => {
@@ -283,12 +288,18 @@ export default function AdminMatchesPage() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        {palestre.map((palestra) => (
+                        {formData.casa && palestre.map((palestra) => (
                           <SelectItem key={palestra.nome} value={palestra.nome}>
                             {palestra.nome}
                           </SelectItem>
                         ))}
-                        <SelectItem value="Altra palestra">Altra palestra</SelectItem>
+                        {!formData.casa && (
+                            <Input 
+                                value={formData.palestra}
+                                onChange={(e) => setFormData({ ...formData, palestra: e.target.value })}
+                                placeholder="Inserisci la palestra della trasferta"
+                            />
+                        )}
                       </SelectContent>
                     </Select>
                   </div>
@@ -358,7 +369,7 @@ export default function AdminMatchesPage() {
                     <Label htmlFor="arbitri">Arbitri (separati da virgola)</Label>
                     <Input
                       id="arbitri"
-                      value={formData.arbitri?.join(", ") || ""}
+                      value={arbitriInput}
                       onChange={(e) => handleArbitriChange(e.target.value)}
                       placeholder="Mario Rossi, Laura Bianchi"
                     />
