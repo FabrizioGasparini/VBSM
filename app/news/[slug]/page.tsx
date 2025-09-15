@@ -1,3 +1,5 @@
+"use client";
+
 import { notFound } from "next/navigation"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"

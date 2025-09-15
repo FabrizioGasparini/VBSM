@@ -10,11 +10,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { getNewsByCategory, getCategories } from "@/lib/news-data"
 import Link from "next/link"
 import { Calendar, User, ArrowRight } from "lucide-react"
+import { loadFromStorage, STORAGE_KEYS } from "@/lib/storage"
 
 export default function NewsPage() {
   const [categoriaFiltro, setCategoriaFiltro] = useState("Tutte")
   const categorie = getCategories()
-  const newsFiltrate = getNewsByCategory(categoriaFiltro)
+  const newsFiltrate = loadFromStorage(STORAGE_KEYS.NEWS, getNewsByCategory(categoriaFiltro))
   const featuredArticles = newsFiltrate.filter((articolo) => articolo.featured)
 
   const formatData = (dataString: string) => {

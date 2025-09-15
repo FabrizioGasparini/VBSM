@@ -1,3 +1,5 @@
+import { loadFromStorage, STORAGE_KEYS } from "./storage";
+
 export interface NewsArticle {
     id: number;
     slug: string;
@@ -78,24 +80,26 @@ La struttura dell’Oxygen Hotel ha permesso di alternare sessioni in palestra e
 ];
 
 export const getNewsById = (id: number): NewsArticle | undefined => {
-    return newsData.find((article) => article.id === id);
+    return loadFromStorage(STORAGE_KEYS.NEWS, newsData).find((article: NewsArticle) => article.id === id);
 };
 
 export const getNewsBySlug = (slug: string): NewsArticle | undefined => {
-    return newsData.find((article) => article.slug === slug);
+    return loadFromStorage(STORAGE_KEYS.NEWS, newsData).find((article: NewsArticle) => article.slug === slug);
 };
 
 export const getFeaturedNews = (): NewsArticle[] => {
-    return newsData.filter((article) => article.featured).slice(0, 3);
+    return loadFromStorage(STORAGE_KEYS.NEWS, newsData).filter((article: NewsArticle) => article.featured);
 };
 
 export const getLatestNews = (limit = 6): NewsArticle[] => {
-    return newsData.sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime()).slice(0, limit);
+    return loadFromStorage(STORAGE_KEYS.NEWS, newsData)
+        .sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime())
+        .slice(0, limit);
 };
 
 export const getNewsByCategory = (category: string): NewsArticle[] => {
-    if (category === "Tutte") return newsData;
-    return newsData.filter((article) => article.categoria === category);
+    if (category === "Tutte") return loadFromStorage(STORAGE_KEYS.NEWS, newsData);
+    return loadFromStorage(STORAGE_KEYS.NEWS, newsData).filter((article: NewsArticle) => article.categoria === category);
 };
 
 export const getCategories = (): string[] => {
