@@ -14,13 +14,13 @@ export function Footer() {
               squadra. Unisciti alla nostra famiglia!
             </p>
             <div className="flex space-x-4">
-              <Link href="#" className="text-secondary-foreground hover:text-volleyball-coral transition-colors">
+              <Link href="https://www.facebook.com/VolleyBallSanMartino/" target="_blank" className="text-secondary-foreground hover:text-volleyball-coral transition-colors">
                 <Facebook className="h-6 w-6" />
               </Link>
-              <Link href="#" className="text-secondary-foreground hover:text-volleyball-coral transition-colors">
+              <Link href="https://www.instagram.com/volley_ball_san_martino/" target="_blank" className="text-secondary-foreground hover:text-volleyball-coral transition-colors">
                 <Instagram className="h-6 w-6" />
               </Link>
-              <Link href="#" className="text-secondary-foreground hover:text-volleyball-coral transition-colors">
+              <Link href="https://www.youtube.com/@volleyballsanmartino5064" target="_blank" className="text-secondary-foreground hover:text-volleyball-coral transition-colors">
                 <Youtube className="h-6 w-6" />
               </Link>
             </div>

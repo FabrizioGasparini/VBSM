@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Users } from "lucide-react"
+import Link from "next/link"
 
 const squadre = [
   {
@@ -175,14 +176,14 @@ export default function SquadrePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {squadre.map((squadra, index) => (
-              <Card key={index} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                <div className="relative overflow-hidden rounded-t-lg">
+              <Card key={index} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 pt-0">
+                <div className="relative border overflow-hidden rounded-t-lg h-full ">
                   <img
                     src={squadra.immagine || "/placeholder.svg"}
                     alt={`Squadra ${squadra.categoria}`}
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <Badge className={`absolute bottom-4 right-4 ${squadra.colore} text-white`}>{squadra.abbreviazione}</Badge>
+                  <Badge className={`absolute top-4 left-4 ${squadra.colore} text-white`}>{squadra.categoria}</Badge>
                 </div>
                 <CardHeader>
                   <CardTitle className="text-xl">{squadra.categoria}</CardTitle>
@@ -203,8 +204,12 @@ export default function SquadrePage() {
                       ))}
                     </div>
                   </div>
-                  <Button variant="outline" className="w-full bg-primary">
-                    Dettagli Squadra
+                  <Button variant="outline" className="w-full bg-transparent" asChild>
+                    <Link
+                      href={`/squadre/${squadra.categoria.toLowerCase().replace(/\s+/g, "-").replace("à", "a").replace("è", "e")}`}
+                    >
+                      Dettagli Squadra
+                    </Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -220,18 +225,22 @@ export default function SquadrePage() {
             <h2 className="font-ethnocentric text-3xl lg:text-4xl mb-4 text-primary">STATISTICHE SQUADRE</h2>
             <p className="text-lg text-muted-foreground">I numeri che raccontano la nostra crescita</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">17</div>
+              <div className="text-4xl font-bold text-primary mb-2">7</div>
               <div className="text-sm text-muted-foreground">Squadre Attive</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">220+</div>
+              <div className="text-4xl font-bold text-primary mb-2">105</div>
               <div className="text-sm text-muted-foreground">Atleti Totali</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">17</div>
+              <div className="text-4xl font-bold text-primary mb-2">12</div>
               <div className="text-sm text-muted-foreground">Allenatori</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold text-primary mb-2">8</div>
+              <div className="text-sm text-muted-foreground">Trofei Stagione</div>
             </div>
           </div>
         </div>

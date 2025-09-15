@@ -22,11 +22,11 @@ export function Navigation() {
 
   return (
     <nav className="sticky pt-3 z-50 w-full bg-primary">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-fit bg-card border border-border lg:rounded-full shadow-lg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px- w-fit bg-card border border-border lg:rounded-full shadow-lg">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <img src={Volleyball.src} alt="Volleyball San Martino" className="h-12 w-auto mr-10 min-w-xs" />
+            <img src={Volleyball.src} alt="Volleyball San Martino" className="h-12 w-auto mr-10 lg:min-w-xs" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -43,7 +43,7 @@ export function Navigation() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden">
+          <div className="lg:hidden w-8">
             <Button variant="ghost" size="sm" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
