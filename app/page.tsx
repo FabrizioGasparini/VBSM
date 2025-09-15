@@ -27,7 +27,7 @@ export default function HomePage() {
             <div className="text-center lg:text-left space-y-8">
               <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-4">
                 <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                <span className="text-sm font-semibold text-foreground uppercase tracking-wide">Dal 1985</span>
+                <span className="text-sm font-semibold text-foreground uppercase tracking-wide">Dal 1984</span>
               </div>
 
               <div className="space-y-6">
@@ -41,7 +41,7 @@ export default function HomePage() {
                     🏐 <strong>Passione, Impegno, Vittoria</strong>
                   </p>
                   <p className="text-lg lg:text-xl text-muted-foreground text-pretty leading-relaxed">
-                    Oltre 35 anni di eccellenza nel volleyball. 16 squadre, 200+ atleti, una sola grande famiglia unita
+                    Oltre 41 anni di eccellenza nel volleyball. 17 squadre, 220+ atleti, una sola grande famiglia unita
                     dalla passione per questo sport.
                   </p>
                 </div>
@@ -70,15 +70,15 @@ export default function HomePage() {
 
               <div className="grid grid-cols-3 gap-6 pt-8 border-t border-muted">
                 <div className="text-center">
-                  <div className="text-2xl lg:text-3xl font-bold text-primary mb-1">16</div>
+                  <div className="text-2xl lg:text-3xl font-bold text-primary mb-1">17</div>
                   <div className="text-sm text-muted-foreground">Squadre Attive</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl lg:text-3xl font-bold text-primary mb-1">200+</div>
+                  <div className="text-2xl lg:text-3xl font-bold text-primary mb-1">220+</div>
                   <div className="text-sm text-muted-foreground">Atleti</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl lg:text-3xl font-bold text-primary mb-1">39</div>
+                  <div className="text-2xl lg:text-3xl font-bold text-primary mb-1">41</div>
                   <div className="text-sm text-muted-foreground">Anni Storia</div>
                 </div>
               </div>
@@ -89,7 +89,7 @@ export default function HomePage() {
                 <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
                 <div className="relative bg-background/80 backdrop-blur-sm rounded-2xl p-4 shadow-2xl">
                   <img
-                    src="/volleyball-team-action-shot-with-players-jumping-a.jpg"
+                    src="/festeggiamenti.png"
                     alt="Volleyball San Martino in azione - Squadra che salta per schiacciare"
                     className="rounded-xl shadow-lg w-full h-auto group-hover:scale-105 transition-transform duration-500"
                   />
