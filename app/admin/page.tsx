@@ -11,70 +11,6 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Shield, Lock } from "lucide-react"
 
 export default function AdminPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [credentials, setCredentials] = useState({ username: "", password: "" })
-  const [error, setError] = useState("")
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Simple authentication - in production use proper auth
-    if (credentials.username === "admin" && credentials.password === "vbsm2026") {
-      setIsAuthenticated(true)
-      setError("")
-    } else {
-      setError("Credenziali non valide")
-    }
-  }
-
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center p-4">
-        <Card className="w-full max-w-md">
-          <CardHeader className="text-center">
-            <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-              <Shield className="h-8 w-8 text-primary" />
-            </div>
-            <CardTitle className="text-2xl">Admin Panel</CardTitle>
-            <CardDescription>Accedi per gestire news e partite</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleLogin} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="username">Username</Label>
-                <Input
-                  id="username"
-                  type="text"
-                  value={credentials.username}
-                  onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value={credentials.password}
-                  onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
-                  required
-                />
-              </div>
-              {error && (
-                <Alert variant="destructive">
-                  <AlertDescription>{error}</AlertDescription>
-                </Alert>
-              )}
-              <Button type="submit" className="w-full">
-                <Lock className="mr-2 h-4 w-4" />
-                Accedi
-              </Button>
-            </form>
-            <div className="mt-4 text-sm text-muted-foreground text-center">Demo: admin / vbsm2026</div>
-          </CardContent>
-        </Card>
-      </div>
-    )
-  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -84,9 +20,6 @@ export default function AdminPage() {
             <h1 className="font-ethnocentric text-3xl text-foreground">ADMIN PANEL</h1>
             <p className="text-muted-foreground">Gestisci news e partite della Volleyball San Martino</p>
           </div>
-          <Button variant="outline" onClick={() => setIsAuthenticated(false)}>
-            Logout
-          </Button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

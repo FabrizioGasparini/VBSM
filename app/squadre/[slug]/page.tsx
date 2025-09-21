@@ -47,7 +47,7 @@ export default async function TeamPage({ params }: TeamPageProps) {
             <Badge className="mb-4 bg-primary-foreground text-primary">{team.campionato}</Badge>
             <h1 className="font-ethnocentric text-4xl lg:text-5xl mb-4">{team.categoria}</h1>
             <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto text-pretty">
-              {team.descrizione} - Stagione {team.stagione}
+              {team.descrizione}
             </p>
           </div>
         </div>
@@ -56,50 +56,15 @@ export default async function TeamPage({ params }: TeamPageProps) {
       {/* Team Image and Stats */}
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-            <div className="lg:col-span-2">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <div className="lg:col-span-2 h-fit">
               <img
                 src={team.immagine || "/placeholder.svg"}
                 alt={`Squadra ${team.categoria}`}
-                className="w-full h-64 lg:h-80 object-cover rounded-lg"
+                className="h-full  object-cover rounded-lg"
               />
             </div>
-            <div className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Trophy className="h-5 w-5 mr-2" />
-                    Statistiche Stagione
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-primary">{team.statistiche.partiteGiocate}</div>
-                      <div className="text-sm text-muted-foreground">Partite</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-green-600">{team.statistiche.vittorie}</div>
-                      <div className="text-sm text-muted-foreground">Vittorie</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-red-600">{team.statistiche.sconfitte}</div>
-                      <div className="text-sm text-muted-foreground">Sconfitte</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-primary">{team.statistiche.puntiTotali}</div>
-                      <div className="text-sm text-muted-foreground">Punti</div>
-                    </div>
-                  </div>
-                  <div className="pt-4 border-t">
-                    <div className="flex justify-between text-sm">
-                      <span>Set Vinti: {team.statistiche.setVinti}</span>
-                      <span>Set Persi: {team.statistiche.setPersi}</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+      
           </div>
 
           {/* Team Details */}

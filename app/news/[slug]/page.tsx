@@ -1,5 +1,3 @@
-"use client";
-
 import { notFound } from "next/navigation"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
@@ -18,11 +16,13 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
   const { slug } = await params
   const article = getNewsBySlug(slug)
 
+  console.log("Article slug:", article)
+
   if (!article) {
     notFound()
   }
 
-  const relatedNews = getLatestNews(4)
+  const relatedNews = (await getLatestNews(4))
     .filter((news) => news.id !== article.id)
     .slice(0, 3)
 
@@ -67,7 +67,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {article.tags.map((tag, index) => (
+                {article.tags && article.tags.map((tag, index) => (
                   <Badge key={index} variant="outline">
                     {tag}
                   </Badge>
@@ -79,7 +79,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
           {/* Article Image */}
           <div className="mb-8">
             <img
-              src={article.immagine || "/placeholder.svg"}
+              src={"https://volleyballsanmartino.it/images/" + article.immagine}
               alt={article.titolo}
               className="w-full h-64 lg:h-96 object-cover rounded-lg shadow-lg"
             />
@@ -90,14 +90,29 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
             <p className="text-xl text-muted-foreground mb-8 font-medium text-pretty">{article.estratto}</p>
 
             <div className="text-foreground leading-relaxed space-y-6">
-              {article.contenuto.split("\n\n").map((paragraph, index) => {
-                if (paragraph.startsWith("**") && paragraph.endsWith("**")) {
+              {article.contenuto.replace("\r", "").split("\n").map((paragraph, index) => {
+                paragraph = paragraph.trim();
+                
+                if (paragraph === "") return null;
+
+                if (/\*\*(.*?)\*\*/.test(paragraph)) {
+                  const parts = paragraph.split(/(\*\*.*?\*\*)/g);
                   return (
-                    <h3 key={index} className="text-xl font-semibold text-primary mt-8 mb-4">
-                      {paragraph.replace(/\*\*/g, "")}
-                    </h3>
-                  )
+                    <p key={index} className="text-pretty">
+                      {parts.map((part, partIndex) => {
+                        if (part.startsWith("**") && part.endsWith("**")) {
+                          return (
+                            <strong key={partIndex} className="text-xl font-semibold text-primary mt-8 mb-4">
+                              {part.slice(2, -2)}
+                            </strong>
+                          );
+                        }
+                        return part;
+                      })}
+                    </p>
+                  );
                 }
+
                 if (paragraph.startsWith("- ")) {
                   const listItems = paragraph.split("\n").filter((item) => item.startsWith("- "))
                   return (
@@ -106,8 +121,22 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
                         <li key={itemIndex}>{item.substring(2)}</li>
                       ))}
                     </ul>
-                  )
+                  );
                 }
+
+                if (/\!\[.*?\]\(.*?\)/.test(paragraph)) {
+                  const imgMatch = paragraph.match(/\!\[(.*?)\]\((.*?)\)/);
+                  if (imgMatch) {
+                    const altText = imgMatch[1];
+                    const url = imgMatch[2];
+                    return (
+                      <div key={index} className="my-8">
+                        <img src={url} alt={altText} className="w-full rounded-lg shadow-lg" />
+                      </div>
+                    );
+                  }
+                }
+
                 return (
                   <p key={index} className="text-pretty">
                     {paragraph}

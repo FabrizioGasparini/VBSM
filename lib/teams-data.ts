@@ -22,15 +22,6 @@ export interface Coach {
     foto?: string;
 }
 
-export interface TeamStats {
-    partiteGiocate: number;
-    vittorie: number;
-    sconfitte: number;
-    setVinti: number;
-    setPersi: number;
-    puntiTotali: number;
-}
-
 export interface Team {
     id: string;
     categoria: string;
@@ -39,7 +30,6 @@ export interface Team {
     campionato: string;
     giocatori: Player[];
     staff: Coach[];
-    statistiche: TeamStats;
     colore: string;
     immagine: string;
 }
@@ -50,7 +40,7 @@ export const teamsData: Team[] = [
         categoria: "S3 White Red Green",
         descrizione: "Annate 2014-20",
         stagione: "2025/2026",
-        campionato: "Minivolley",
+        campionato: "S3 White / Red / Green",
         colore: "bg-primary",
         immagine: "/s3.png",
         giocatori: Array.from({ length: 12 }, (_, i) => ({
@@ -90,14 +80,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Corso Base Allenatori"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 10,
-            vittorie: 6,
-            sconfitte: 4,
-            setVinti: 15,
-            setPersi: 12,
-            puntiTotali: 18,
-        },
     },
     {
         id: "under-12-femminile",
@@ -136,14 +118,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Corso Base Allenatori"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 14,
-            vittorie: 9,
-            sconfitte: 5,
-            setVinti: 24,
-            setPersi: 18,
-            puntiTotali: 27,
-        },
     },
     {
         id: "under-13-femminile",
@@ -182,14 +156,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Corso Base Allenatori"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 16,
-            vittorie: 11,
-            sconfitte: 5,
-            setVinti: 28,
-            setPersi: 20,
-            puntiTotali: 33,
-        },
     },
     {
         id: "under-14-femminile",
@@ -228,14 +194,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Corso Base Allenatori"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 15,
-            vittorie: 10,
-            sconfitte: 5,
-            setVinti: 26,
-            setPersi: 19,
-            puntiTotali: 30,
-        },
     },
     {
         id: "under-15-maschile",
@@ -274,14 +232,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Corso Specializzazione Giovanile"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 16,
-            vittorie: 13,
-            sconfitte: 3,
-            setVinti: 35,
-            setPersi: 15,
-            puntiTotali: 39,
-        },
     },
     {
         id: "under-16-femminile",
@@ -320,14 +270,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Allenatore di 2° Grado FIPAV"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 18,
-            vittorie: 12,
-            sconfitte: 6,
-            setVinti: 32,
-            setPersi: 24,
-            puntiTotali: 36,
-        },
     },
     {
         id: "under-16-femminile-csi",
@@ -358,14 +300,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Allenatore di 2° Grado FIPAV"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 16,
-            vittorie: 10,
-            sconfitte: 6,
-            setVinti: 26,
-            setPersi: 22,
-            puntiTotali: 30,
-        },
     },
     {
         id: "under-18-femminile-prima-divisione",
@@ -396,14 +330,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Allenatore di 1° Grado FIPAV", "Master in Preparazione Atletica"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 20,
-            vittorie: 15,
-            sconfitte: 5,
-            setVinti: 42,
-            setPersi: 22,
-            puntiTotali: 45,
-        },
     },
     {
         id: "under-18-femminile-csi",
@@ -442,14 +368,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Corso Base Allenatori"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 18,
-            vittorie: 13,
-            sconfitte: 5,
-            setVinti: 36,
-            setPersi: 20,
-            puntiTotali: 39,
-        },
     },
     {
         id: "under-19-maschile",
@@ -564,14 +482,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Corso Specializzazione Giovanile"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 18,
-            vittorie: 14,
-            sconfitte: 4,
-            setVinti: 38,
-            setPersi: 18,
-            puntiTotali: 42,
-        },
     },
     {
         id: "prima-divisione-maschile",
@@ -714,14 +624,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Corso Base Allenatori"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 16,
-            vittorie: 9,
-            sconfitte: 7,
-            setVinti: 24,
-            setPersi: 26,
-            puntiTotali: 27,
-        },
     },
     {
         id: "terza-divisione-femminile",
@@ -752,14 +654,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Allenatore di 2° Grado FIPAV"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 16,
-            vittorie: 8,
-            sconfitte: 8,
-            setVinti: 22,
-            setPersi: 24,
-            puntiTotali: 24,
-        },
     },
     {
         id: "misto-amatoriale",
@@ -790,14 +684,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Allenatore di 2° Grado FIPAV"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 14,
-            vittorie: 7,
-            sconfitte: 7,
-            setVinti: 19,
-            setPersi: 21,
-            puntiTotali: 21,
-        },
     },
     {
         id: "serie-d-femminile",
@@ -828,14 +714,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Allenatore di 1° Grado FIPAV"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 18,
-            vittorie: 11,
-            sconfitte: 7,
-            setVinti: 30,
-            setPersi: 26,
-            puntiTotali: 33,
-        },
     },
     {
         id: "serie-c-femminile",
@@ -866,14 +744,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Allenatore di 1° Grado FIPAV", "Master in Preparazione Atletica"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 20,
-            vittorie: 16,
-            sconfitte: 4,
-            setVinti: 45,
-            setPersi: 20,
-            puntiTotali: 48,
-        },
     },
     {
         id: "serie-c-maschile",
@@ -904,14 +774,6 @@ export const teamsData: Team[] = [
                 qualifiche: ["Allenatore di 1° Grado FIPAV", "Master in Preparazione Atletica", "Corso Specializzazione Serie A"],
             },
         ],
-        statistiche: {
-            partiteGiocate: 22,
-            vittorie: 18,
-            sconfitte: 4,
-            setVinti: 52,
-            setPersi: 22,
-            puntiTotali: 54,
-        },
     },
 ];
 

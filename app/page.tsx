@@ -7,12 +7,12 @@ import Link from "next/link"
 import { Calendar, Users, Clock, ArrowRight, Heart, Target, Award, Zap, User } from "lucide-react"
 import { getLatestNews } from "@/lib/news-data"
 
-export default function HomePage() {
-  const latestNews = getLatestNews(3)
+export default async function HomePage() {
+  const latestNews = await getLatestNews(3)
 
   return (
     <div className="min-h-screen">
-      <Navigation />
+      <Navigation background="bg-transparent" />
 
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-background via-muted/20 to-accent/10 overflow-hidden">
@@ -89,9 +89,9 @@ export default function HomePage() {
                 <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
                 <div className="relative bg-background/80 backdrop-blur-sm rounded-2xl p-4 shadow-2xl">
                   <img
-                    src="/festeggiamenti.png"
+                    src="https://www.volleyballsanmartino.it/images/2025-26/pages/festeggiamenti.png"
                     alt="Volleyball San Martino in azione - Squadra che salta per schiacciare"
-                    className="rounded-xl shadow-lg w-full h-auto group-hover:scale-105 transition-transform duration-500"
+                    className="rounded-xl shadow-lg w-full h-auto group-hover:scale-x-105 group-hover:scale-y-[108%] transition-transform duration-500"
                   />
 
                   <div className="absolute -top-2 -right-2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-semibold shadow-lg animate-bounce">
@@ -166,7 +166,7 @@ export default function HomePage() {
                 <Link href={`/news/${article.slug}`}>
                   <div className="relative overflow-hidden rounded-t-lg">
                     <img
-                      src={article.immagine || "/placeholder.svg"}
+                      src={"https://volleyballsanmartino.it/images/" + article.immagine || "/placeholder.svg"}
                       alt={article.titolo}
                       className={`w-full object-cover group-hover:scale-110 transition-transform duration-700 ${
                         index === 0 ? "h-54" : "h-48"

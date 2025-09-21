@@ -1,5 +1,3 @@
-import { loadFromStorage, STORAGE_KEYS } from "./storage";
-
 export interface NewsArticle {
     id: number;
     slug: string;
@@ -14,32 +12,32 @@ export interface NewsArticle {
     featured?: boolean;
 }
 
-export const newsData: NewsArticle[] = loadFromStorage<NewsArticle[]>(STORAGE_KEYS.NEWS, []);
+export const newsData: NewsArticle[] = await fetch("https://www.volleyballsanmartino.it/api/news.php")
+    .then((res) => res.json())
+    .then((data) => data as NewsArticle[]);
 
 export const getNewsById = (id: number): NewsArticle | undefined => {
-    return loadFromStorage(STORAGE_KEYS.NEWS, newsData).find((article: NewsArticle) => article.id === id);
+    return newsData.find((article: NewsArticle) => article.id === id);
 };
 
 export const getNewsBySlug = (slug: string): NewsArticle | undefined => {
-    return loadFromStorage(STORAGE_KEYS.NEWS, newsData).find((article: NewsArticle) => article.slug === slug);
+    return newsData.find((article: NewsArticle) => article.slug === slug);
 };
 
 export const getFeaturedNews = (): NewsArticle[] => {
-    return loadFromStorage(STORAGE_KEYS.NEWS, newsData).filter((article: NewsArticle) => article.featured);
+    return newsData.filter((article: NewsArticle) => article.featured);
 };
 
-export const getLatestNews = (limit = 6): NewsArticle[] => {
-    return loadFromStorage(STORAGE_KEYS.NEWS, newsData)
-        .sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime())
-        .slice(0, limit);
+export const getLatestNews = async (limit = 6): Promise<NewsArticle[]> => {
+    return newsData.sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime()).slice(0, limit);
 };
 
 export const getNewsByCategory = (category: string): NewsArticle[] => {
-    if (category === "Tutte") return loadFromStorage(STORAGE_KEYS.NEWS, newsData);
-    return loadFromStorage(STORAGE_KEYS.NEWS, newsData).filter((article: NewsArticle) => article.categoria === category);
+    if (category === "Tutte") return newsData;
+    return newsData.filter((article: NewsArticle) => article.categoria === category);
 };
 
 export const getCategories = (): string[] => {
-    const categories = ["Tutte", ...new Set(loadFromStorage(STORAGE_KEYS.NEWS, newsData).map((article) => article.categoria))];
+    const categories = ["Tutte", ...new Set(newsData.map((article) => article.categoria))];
     return categories;
 };

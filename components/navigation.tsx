@@ -17,11 +17,11 @@ const navigationItems = [
   { name: "Contatti", href: "/contatti" },
 ]
 
-export function Navigation() {
+export function Navigation({background}: {background?: string}) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="sticky pt-3 z-50 w-full bg-primary">
+    <nav className={`sticky pt-3 z-50 w-full ${background ? background : "bg-primary"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px- w-fit bg-card border border-border lg:rounded-full shadow-lg">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}

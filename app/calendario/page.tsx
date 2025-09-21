@@ -15,8 +15,10 @@ export default function CalendarioPage() {
   const [squadraFiltro, setSquadraFiltro] = useState("Tutte le Squadre")
 
   const partiteFiltrate = partite.filter(
-    (partita) => squadraFiltro === "Tutte le Squadre" || partita.squadra === squadraFiltro,
+    (partita) => squadraFiltro === "Tutte le Squadre" || partita.campionato === squadraFiltro,
   )
+
+  console.log(partiteFiltrate)
 
   const partiteCompletate = partiteFiltrate.filter((p) => p.completata)
   const partiteProssime = partiteFiltrate.filter((p) => !p.completata)
@@ -266,7 +268,7 @@ export default function CalendarioPage() {
                   La nostra palestra principale, dove si svolgono la maggior parte degli allenamenti e delle partite
                   casalinghe.
                 </p>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={() => window.open("https://maps.app.goo.gl/UgC7gkjFung7YARU6", "_blank")}>
                   Vedi Mappa
                 </Button>
               </CardContent>
@@ -284,7 +286,7 @@ export default function CalendarioPage() {
                 <p className="text-sm text-muted-foreground mb-4">
                   Palestra secondaria utilizzata principalmente per gli allenamenti delle categorie giovanili.
                 </p>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={() => window.open("https://maps.app.goo.gl/pG8pnKMbBLmZ7yfH7", "_blank")}>
                   Vedi Mappa
                 </Button>
               </CardContent>
@@ -302,7 +304,7 @@ export default function CalendarioPage() {
                 <p className="text-sm text-muted-foreground mb-4">
                   La palestra più piccola, utilizzata per le attività delle categorie giovanili e dalla scuola primaria.
                 </p>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" onClick={() => window.open("https://maps.app.goo.gl/Dq2NkTaoiiRty1m8A", "_blank")}>
                   Vedi Mappa
                 </Button>
               </CardContent>

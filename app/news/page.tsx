@@ -76,7 +76,7 @@ export default function NewsPage() {
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                     <div className="relative">
                       <img
-                        src={featuredArticle.immagine || "/placeholder.svg"}
+                        src={"https://volleyballsanmartino.it/images/" + featuredArticle.immagine || "/placeholder.svg"}
                         alt={featuredArticle.titolo}
                         className="w-full h-64 lg:h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />

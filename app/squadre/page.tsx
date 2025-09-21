@@ -183,7 +183,7 @@ export default function SquadrePage() {
                     alt={`Squadra ${squadra.categoria}`}
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <Badge className={`absolute top-4 left-4 ${squadra.colore} text-white`}>{squadra.categoria}</Badge>
+                  <Badge className={`absolute top-2 left-2 ${squadra.colore} text-white`}>{squadra.categoria}</Badge>
                 </div>
                 <CardHeader>
                   <CardTitle className="text-xl">{squadra.categoria}</CardTitle>
