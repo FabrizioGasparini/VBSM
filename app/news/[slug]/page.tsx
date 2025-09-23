@@ -37,7 +37,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
 
   return (
     <div className="min-h-screen">
-      <Navigation />
+      <Navigation background="bg-transparent" />
 
       {/* Article Header */}
       <section className="py-16 bg-background">
@@ -79,7 +79,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
           {/* Article Image */}
           <div className="mb-8">
             <img
-              src={"https://volleyballsanmartino.it/images/" + article.immagine}
+              src={"/images/" + article.immagine}
               alt={article.titolo}
               className="w-full h-64 lg:h-96 object-cover rounded-lg shadow-lg"
             />
@@ -131,7 +131,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
                     const url = imgMatch[2];
                     return (
                       <div key={index} className="my-8">
-                        <img src={url} alt={altText} className="w-full rounded-lg shadow-lg" />
+                        <img src={"/images/" + url} alt={altText} className="w-full rounded-lg shadow-lg" />
                       </div>
                     );
                   }
@@ -160,7 +160,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
                   <Link href={`/news/${news.slug}`}>
                     <div className="relative overflow-hidden rounded-t-lg">
                       <img
-                        src={news.immagine || "/placeholder.svg"}
+                        src={"/images/" + news.immagine || "/placeholder.svg"}
                         alt={news.titolo}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                       />

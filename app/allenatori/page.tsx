@@ -70,7 +70,7 @@ export default function CalendarioCustomPage() {
           <div className="flex items-center space-x-4">
             <span className="text-sm font-medium">Filtra per palestra:</span>
             <Select value={palestraFiltro} onValueChange={setPalestraFiltro}>
-           <SelectTrigger className="w-56">
+              <SelectTrigger className="w-56">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -85,12 +85,11 @@ export default function CalendarioCustomPage() {
 
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-
           {/* Form per aggiungere evento */}
           <Card className="mb-8">
             <CardContent className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
               <Select value={formData.squadra} onValueChange={(val) => setFormData({ ...formData, squadra: val })}>
-                <SelectTrigger className="w-full md:w-auto">
+                <SelectTrigger className="w-full md:w-auto bg-secondary p-2">
                   <SelectValue placeholder="Seleziona Squadra" />
                 </SelectTrigger>
                 <SelectContent>
@@ -100,7 +99,7 @@ export default function CalendarioCustomPage() {
                 </SelectContent>
               </Select>
               <Select value={formData.palestra} onValueChange={(val) => setFormData({ ...formData, palestra: val })}>
-                <SelectTrigger className="w-full md:w-auto">
+                <SelectTrigger className="w-full md:w-auto bg-secondary ">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -113,13 +112,13 @@ export default function CalendarioCustomPage() {
                 type="date"
                 value={formData.data}
                 onChange={(e) => setFormData({ ...formData, data: e.target.value })}
-                className="border rounded p-2"
+                className="border rounded p-2 bg-secondary h-full"
               />
               <input
                 type="time"
                 value={formData.ora}
                 onChange={(e) => setFormData({ ...formData, ora: e.target.value })}
-                className="border rounded p-2"
+                className="border rounded p-2 bg-secondary"
               />
               <Button onClick={() => {}} className="col-span-1 md:col-span-1">Aggiungi Evento</Button>
             </CardContent>
@@ -128,7 +127,7 @@ export default function CalendarioCustomPage() {
     </section>          
 
       {/* Calendario */}
-                  <div className="flex items-center gap-2 w-full justify-center">
+    <div className="flex items-center gap-2 w-full justify-center">
             <Button className="text-xs" onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1))}>
               {"<"} Mese Precedente
             </Button>
@@ -145,7 +144,7 @@ export default function CalendarioCustomPage() {
           ))}
 
           {days.map(giorno => (
-            <div key={giorno.toISOString()} className="border rounded-lg p-2 min-h-[100px] relative">
+            <div key={giorno.toISOString()} className="border rounded-lg p-2 min-h-[8px] relative">
               <span className="font-bold">{formatGiorno(giorno)}</span>
 
               <div className="mt-1 space-y-1">
@@ -155,7 +154,7 @@ export default function CalendarioCustomPage() {
                       <div className="font-semibold text-sm mb-2">{ev.squadra}</div>
                       <Badge variant="secondary" className="text-[10px] mb-1 hidden">{ev.tipo}</Badge>
                       <div className="text-[10px]">{ev.palestra}</div>
-                      <div className="text-[10px]">{new Date(ev.data + "T" + ev.ora).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                      <div className="text-[10px]">{new Date(ev.data + "T" + ev.oraInizio).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {new Date(ev.data + "T" + ev.oraFine).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
                     </CardContent>
                   </Card>
                 ))}

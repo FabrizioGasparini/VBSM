@@ -89,9 +89,9 @@ export default async function HomePage() {
                 <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
                 <div className="relative bg-background/80 backdrop-blur-sm rounded-2xl p-4 shadow-2xl">
                   <img
-                    src="https://www.volleyballsanmartino.it/images/2025-26/pages/festeggiamenti.png"
+                    src="/images/2025-26/pages/festeggiamenti.png"
                     alt="Volleyball San Martino in azione - Squadra che salta per schiacciare"
-                    className="rounded-xl shadow-lg w-full h-auto group-hover:scale-x-105 group-hover:scale-y-[108%] transition-transform duration-500"
+                    className="rounded-xl shadow-lg w-full h-auto transition-transform duration-500"
                   />
 
                   <div className="absolute -top-2 -right-2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-semibold shadow-lg animate-bounce">
@@ -166,7 +166,7 @@ export default async function HomePage() {
                 <Link href={`/news/${article.slug}`}>
                   <div className="relative overflow-hidden rounded-t-lg">
                     <img
-                      src={"https://volleyballsanmartino.it/images/" + article.immagine || "/placeholder.svg"}
+                      src={"/images/" + article.immagine || "/placeholder.svg"}
                       alt={article.titolo}
                       className={`w-full object-cover group-hover:scale-110 transition-transform duration-700 ${
                         index === 0 ? "h-54" : "h-48"
@@ -334,7 +334,7 @@ export default async function HomePage() {
             </div>
             <div className="relative">
               <img
-                src="/promozioneb2.png"
+                src="/images/2025-26/pages/promozioneb2.png"
                 alt="La squadra Volleyball San Martino"
                 className="rounded-lg shadow-lg w-full h-auto"
               />

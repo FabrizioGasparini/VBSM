@@ -145,6 +145,7 @@ export default function ContattiPage() {
                       onChange={handleInputChange}
                       placeholder="Il tuo nome completo"
                       required
+                      className="bg-secondary"
                     />
                   </div>
                   <div className="space-y-2">
@@ -157,6 +158,7 @@ export default function ContattiPage() {
                       onChange={handleInputChange}
                       placeholder="la-tua-email@esempio.com"
                       required
+                      className="bg-secondary"
                     />
                   </div>
                 </div>
@@ -169,15 +171,16 @@ export default function ContattiPage() {
                       value={formData.telefono}
                       onChange={handleInputChange}
                       placeholder="+39 123 456 7890"
+                      className="bg-secondary"
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="oggetto">Oggetto *</Label>
-                    <Select value={formData.oggetto} onValueChange={handleSelectChange}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Seleziona l'oggetto" />
+                    <Select value={formData.oggetto} onValueChange={handleSelectChange} >
+                      <SelectTrigger className="bg-secondary w-full">
+                        <SelectValue placeholder="Seleziona l'oggetto"  />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-secondary">
                         <SelectItem value="informazioni-generali">Informazioni Generali</SelectItem>
                         <SelectItem value="iscrizione-squadra">Iscrizione a una Squadra</SelectItem>
                         <SelectItem value="prova">Richiesta Prova</SelectItem>
@@ -199,6 +202,7 @@ export default function ContattiPage() {
                     placeholder="Scrivi qui il tuo messaggio..."
                     rows={6}
                     required
+                    className="bg-secondary"
                   />
                 </div>
                 <div className="text-center">

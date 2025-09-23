@@ -12,8 +12,6 @@ export function middleware(req: NextRequest) {
         else return NextResponse.next();
     }
 
-    if (req.nextUrl.pathname.startsWith("/images/")) return NextResponse.next();
-
     if (!token) return NextResponse.redirect(new URL("/login", req.url));
 
     return NextResponse.next();

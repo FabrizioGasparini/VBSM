@@ -4,17 +4,18 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
-import Volleyball from "../public/vbsm-logo-lungo.png"
+import Volleyball from "../public/images/loghi/lungo-bianco.png"
 
 const navigationItems = [
   { name: "Home", href: "/" },
   { name: "Squadre", href: "/squadre" },
-  { name: "Calendario", href: "/calendario" },
+  //{ name: "Calendario", href: "/calendario" },
   { name: "News", href: "/news" },
   { name: "Allenamenti", href: "/allenamenti" },
   { name: "Chi Siamo", href: "/chi-siamo" },
   { name: "Sponsor", href: "/sponsor" },
   { name: "Contatti", href: "/contatti" },
+  { name: "Area Allenatori", href: "/allenatori" },
 ]
 
 export function Navigation({background}: {background?: string}) {
@@ -26,7 +27,7 @@ export function Navigation({background}: {background?: string}) {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <img src={Volleyball.src} alt="Volleyball San Martino" className="h-12 w-auto mr-10 lg:min-w-xs" />
+            <img src={Volleyball.src} alt="Volleyball San Martino" className="h-11 w-auto mr-10 lg:min-w-xs" />
           </Link>
 
           {/* Desktop Navigation */}

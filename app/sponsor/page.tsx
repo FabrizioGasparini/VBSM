@@ -7,10 +7,10 @@ import { Star, Heart, Award, Handshake } from "lucide-react"
 
 const sponsorPrincipali = [
   {
-    nome: "SportTech Solutions",
+    nome: "AMA",
     categoria: "Main Sponsor",
-    logo: "/sponsor-sporttech-solutions-logo.jpg",
-    descrizione: "Tecnologie innovative per lo sport",
+    logo: "/sponsor-ama-logo.jpg",
+    descrizione: "Tecnologie all'avanguardia per macchinari agricoli",
     contributo: "Attrezzature tecniche e divise ufficiali",
     livello: "Oro",
     anni: "Dal 2020",

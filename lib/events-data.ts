@@ -2,7 +2,8 @@ export interface Evento {
     id: number;
     squadra: string;
     data: string;
-    ora: string;
+    oraInizio: string;
+    oraFine: string;
     palestra: string;
     tipo: string;
 }
