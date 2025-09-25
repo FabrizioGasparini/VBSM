@@ -7,7 +7,8 @@ const nextConfig = {
                 destination: 'https://volleyballsanmartino.it/:path*', 
             },
         ];
-    }
+    },
+    skipMiddlewareUrlNormalize: true,
 };
 
 export default nextConfig;

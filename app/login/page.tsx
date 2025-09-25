@@ -16,7 +16,7 @@ export default function LoginPage() {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await fetch("/api/login", {
+    const res = await fetch("/nextapi/login", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({ username, password }),
