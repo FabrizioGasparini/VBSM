@@ -1,4 +1,4 @@
-interface Player {
+export interface Player {
     id: string; // o number, se player_id è numerico
     nome: string;
     cognome: string;
@@ -8,7 +8,7 @@ interface Player {
 }
 
 // Un allenatore
-interface Coach {
+export interface Coach {
     id: string; // nome-cognome se lo usi come id
     nome: string;
     cognome: string;
@@ -16,19 +16,19 @@ interface Coach {
 }
 
 // La squadra completa
-interface Team {
+export interface Team {
+    idx: number; // per ordinamento
     id: string; // id della squadra
     categoria: string;
     descrizione: string;
     stagione: string;
     campionato: string;
     colore: string | null;
-    immagine: string | null;
     players: Player[];
     coaches: Coach[];
 }
 
-export const teamsData: Team[] = await fetch("https://www.volleyballsanmartino.it/api/teams.php")
+export const teamsData: Team[] = await fetch("https://www.volleyballsanmartino.it/api/teams")
     .then((res) => res.json())
     .then((data) => data as Team[]);
 

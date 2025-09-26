@@ -9,13 +9,13 @@ import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Calendar, Info, Trophy } from "lucide-react"
 import { squadreOptions } from "@/lib/matches-data"
-import { eventi, palestreOptions, type Evento } from "@/lib/events-data"
+import { palestreOptions, type Evento } from "@/lib/events-data"
 
 export default function CalendarioCustomPage() {
   const [palestraFiltro, setPalestraFiltro] = useState("Tutte le Palestre")
   const [currentMonth, setCurrentMonth] = useState(new Date())
 
-  const [listaEventi, setListaEventi] = useState<Evento[]>(eventi) // In futuro puoi caricare da DB
+  const [listaEventi, setListaEventi] = useState<Evento[]>() // In futuro puoi caricare da DB
   const [formData, setFormData] = useState({
     squadra: "",
     palestra: palestreOptions[0],
@@ -23,6 +23,20 @@ export default function CalendarioCustomPage() {
     ora: "",
     tipo: "Amichevole",
   })
+
+
+  useEffect(() => {
+    async function fetchEventi() {
+      const response = await fetch("/api/events");
+      const data: Evento[] = await response.json();
+      setListaEventi(data);
+    }
+    fetchEventi();
+  }, []);
+
+  if (!listaEventi) {
+    return <div>Loading...</div>
+  }
 
   const eventiFiltrati = listaEventi.filter(
     (e) => palestraFiltro === "Tutte le Palestre" || e.palestra === palestraFiltro
@@ -40,7 +54,7 @@ export default function CalendarioCustomPage() {
 
   const days = daysInMonth(currentMonth.getMonth(), currentMonth.getFullYear())
 
-    const eventiDelGiorno = (giorno: Date) => {
+  const eventiDelGiorno = (giorno: Date) => {
     return eventiFiltrati.filter(ev => new Date(ev.data).toISOString().slice(0, 10) === giorno.toISOString().slice(0, 10))
   }
 
@@ -59,8 +73,8 @@ export default function CalendarioCustomPage() {
         </div>
       </section>
 
-        <section className="py-8 bg-background border-b">
-            
+      <section className="py-8 bg-background border-b">
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-4">
             <Calendar className="h-6 w-6 text-primary" />
@@ -120,23 +134,23 @@ export default function CalendarioCustomPage() {
                 onChange={(e) => setFormData({ ...formData, ora: e.target.value })}
                 className="border rounded p-2 bg-secondary"
               />
-              <Button onClick={() => {}} className="col-span-1 md:col-span-1">Aggiungi Evento</Button>
+              <Button onClick={() => { }} className="col-span-1 md:col-span-1">Aggiungi Evento</Button>
             </CardContent>
-        </Card>
-              </div>
-    </section>          
+          </Card>
+        </div>
+      </section>
 
       {/* Calendario */}
-    <div className="flex items-center gap-2 w-full justify-center">
-            <Button className="text-xs" onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1))}>
-              {"<"} Mese Precedente
-            </Button>
-            <span className="font-semibold text-2xl px-10">{currentMonth.toLocaleString("it-IT", { month: "long", year: "numeric" }).toUpperCase()}</span>
-            <Button className="text-xs" onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1))}>
-              Mese Successivo {">"}
-            </Button>
-          </div>
-          <section className="py-8 bg-background">
+      <div className="flex items-center gap-2 w-full justify-center">
+        <Button className="text-xs" onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1))}>
+          {"<"} Mese Precedente
+        </Button>
+        <span className="font-semibold text-2xl px-10">{currentMonth.toLocaleString("it-IT", { month: "long", year: "numeric" }).toUpperCase()}</span>
+        <Button className="text-xs" onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1))}>
+          Mese Successivo {">"}
+        </Button>
+      </div>
+      <section className="py-8 bg-background">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-7 gap-2">
           {["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"].map(d => (
@@ -154,7 +168,7 @@ export default function CalendarioCustomPage() {
                       <div className="font-semibold text-sm mb-2">{ev.squadra}</div>
                       <Badge variant="secondary" className="text-[10px] mb-1 hidden">{ev.tipo}</Badge>
                       <div className="text-[10px]">{ev.palestra}</div>
-                      <div className="text-[10px]">{new Date(ev.data + "T" + ev.oraInizio).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {new Date(ev.data + "T" + ev.oraFine).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                      <div className="text-[10px]">{new Date(ev.data.replace("00:00:00.000Z", ev.oraInizio)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {new Date(ev.data.replace("00:00:00.000Z", ev.oraFine)).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
                     </CardContent>
                   </Card>
                 ))}

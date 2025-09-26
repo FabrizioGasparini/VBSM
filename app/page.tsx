@@ -157,20 +157,18 @@ export default async function HomePage() {
             {latestNews.map((article, index) => (
               <Card
                 key={article.id}
-                className={`group hover:shadow-2xl transition-all duration-700 hover:-translate-y-4 border-2 pt-0 ${
-                  index === 0
-                    ? "lg:scale-110 border-primary/30 bg-gradient-to-br from-primary/5 to-accent/5 shadow-xl"
-                    : "hover:border-primary/20"
-                }`}
+                className={`group hover:shadow-2xl transition-all duration-700 hover:-translate-y-4 border-2 pt-0 ${index === 0
+                  ? "lg:scale-110 border-primary/30 bg-gradient-to-br from-primary/5 to-accent/5 shadow-xl"
+                  : "hover:border-primary/20"
+                  }`}
               >
                 <Link href={`/news/${article.slug}`}>
                   <div className="relative overflow-hidden rounded-t-lg">
                     <img
                       src={"/images/" + article.immagine || "/placeholder.svg"}
                       alt={article.titolo}
-                      className={`w-full object-cover group-hover:scale-110 transition-transform duration-700 ${
-                        index === 0 ? "h-54" : "h-48"
-                      }`}
+                      className={`w-full object-cover group-hover:scale-110 transition-transform duration-700 ${index === 0 ? "h-54" : "h-48"
+                        }`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 

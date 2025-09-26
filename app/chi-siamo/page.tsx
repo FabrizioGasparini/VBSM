@@ -12,31 +12,6 @@ const storia = [
     descrizione: "Nasce il Volleyball San Martino con l'obiettivo di promuovere la pallavolo nel territorio",
   },
   {
-    anno: "1992",
-    evento: "Prima Promozione",
-    descrizione: "La squadra senior maschile conquista la promozione in Serie D",
-  },
-  {
-    anno: "1998",
-    evento: "Settore Giovanile",
-    descrizione: "Avvio del settore giovanile con le prime squadre Under 14 e Under 16",
-  },
-  {
-    anno: "2005",
-    evento: "Nuova Palestra",
-    descrizione: "Inaugurazione della Palestra Comunale, casa delle nostre squadre",
-  },
-  {
-    anno: "2012",
-    evento: "Serie C",
-    descrizione: "Storica promozione in Serie C per la squadra femminile",
-  },
-  {
-    anno: "2024",
-    evento: "Serie B2",
-    descrizione: "La Serie C Femminile ottiene la storica promozione in Serie B2, il massimo traguardo raggiunto finora",
-  },
-  {
     anno: "Giugno 2025",
     evento: "Serie B",
     descrizione: "La Serie C Maschile ottiene la promozione in Serie B, diventando la seconda Serie B Maschile a San Martino",
@@ -56,31 +31,41 @@ const storia = [
 const staff = [
   {
     nome: "Roberto Intonti",
-    ruolo: "Presidente",
-    esperienza: "Primo Anno",
+    ruolo: "Presidente / Direttore Sportivo",
     descrizione: "Guida la società con passione e dedizione",
-    immagine: "/staff-president-roberto-martinelli.jpg",
+    immagine: "/images/2025-26/pages/chi-siamo/presidente.png",
+    large: true,
   },
   {
     nome: "Enrico Ruozzi",
     ruolo: "Vice Presidente",
-    esperienza: "Primo Anno",
     descrizione: "Supporta il presidente nelle decisioni strategiche",
-    immagine: "/staff-sports-director-elena-rossi.jpg",
+    immagine: "/images/2025-26/pages/chi-siamo/vice-presidente.png",
+    large: true,
   },
   {
     nome: "Alberto Iotti",
-    ruolo: "Responsabile Settore Maschile",
-    esperienza: "Primo Anno",
-    descrizione: "Coordina l'attività delle squadre giovanili maschili",
-    immagine: "/staff-youth-coordinator-marco-bianchi.jpg",
+    ruolo: "Direttore Tecnico Maschile",
+    descrizione: "Coordina l'attività delle squadre maschili",
+    immagine: "/images/2025-26/pages/chi-siamo/direttore-tecnico-maschile.png",
   },
   {
     nome: "Catia Cattini",
-    ruolo: "Responsabile Settore Femminile",
-    esperienza: "Primo Anno",
-    descrizione: "Coordina l'attività delle squadre giovanili femminili",
-    immagine: "/staff-secretary-anna-verdi.jpg",
+    ruolo: "Direttrice Tecnica Femminile",
+    descrizione: "Coordina l'attività delle squadre femminili",
+    immagine: "/images/2025-26/pages/chi-siamo/direttore-tecnico-femminile.png",
+  },
+  {
+    nome: "Erio Cavazzoni",
+    ruolo: "Dirigente Maschile",
+    descrizione: "Assiste il direttore tecnico maschile nella gestione delle squadre",
+    immagine: "/images/2025-26/pages/chi-siamo/dirigente-maschile.png",
+  },
+  {
+    nome: "Antonella Iannicello",
+    ruolo: "Dirigente Femminile",
+    descrizione: "Assiste il direttore tecnico femminile nella gestione delle squadre",
+    immagine: "/images/2025-26/pages/chi-siamo/dirigente-femminile.png",
   },
 ]
 
@@ -143,7 +128,7 @@ export default function ChiSiamoPage() {
             </div>
             <div className="relative">
               <img
-                src="/promozioneb2.png"
+                src="/images/2025-26/pages/promozioneb2.png"
                 alt="La famiglia Volleyball San Martino"
                 className="rounded-lg shadow-lg w-full"
               />
@@ -227,11 +212,11 @@ export default function ChiSiamoPage() {
             {staff.map((membro, index) => (
               <Card
                 key={index}
-                className="text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                className={`text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 ${membro.large ? "md:col-span-2 lg:col-span-2" : ""}`}
               >
                 <div className="relative overflow-hidden rounded-t-lg">
                   <img
-                    src={membro.immagine || "/placeholder.svg?height=200&width=200&query=professional staff member"}
+                    src={membro.immagine || "/placeholder.svg"}
                     alt={membro.nome}
                     className="w-full h-48 object-cover"
                   />
@@ -241,10 +226,6 @@ export default function ChiSiamoPage() {
                   <CardDescription className="text-primary font-medium">{membro.ruolo}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  <div className="flex items-center justify-center space-x-2">
-                    <Award className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm">{membro.esperienza}</span>
-                  </div>
                   <p className="text-sm text-muted-foreground text-pretty">{membro.descrizione}</p>
                 </CardContent>
               </Card>

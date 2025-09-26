@@ -14,7 +14,7 @@ interface NewsArticlePageProps {
 
 export default async function NewsArticlePage({ params }: NewsArticlePageProps) {
   const { slug } = await params
-  const article = getNewsBySlug(slug)
+  const article = await getNewsBySlug(slug)
 
   console.log("Article slug:", article)
 
@@ -92,7 +92,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
             <div className="text-foreground leading-relaxed space-y-6">
               {article.contenuto.replace("\r", "").split("\n").map((paragraph, index) => {
                 paragraph = paragraph.trim();
-                
+
                 if (paragraph === "") return null;
 
                 if (/\*\*(.*?)\*\*/.test(paragraph)) {
@@ -112,6 +112,7 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
                     </p>
                   );
                 }
+
 
                 if (paragraph.startsWith("- ")) {
                   const listItems = paragraph.split("\n").filter((item) => item.startsWith("- "))

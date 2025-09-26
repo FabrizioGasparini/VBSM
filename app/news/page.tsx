@@ -1,21 +1,35 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { getNewsByCategory, getCategories } from "@/lib/news-data"
+import { NewsArticle } from "@/lib/news-data"
 import Link from "next/link"
 import { Calendar, User, ArrowRight } from "lucide-react"
 
 export default function NewsPage() {
   const [categoriaFiltro, setCategoriaFiltro] = useState("Tutte")
-  const categorie = getCategories()
-  const newsFiltrate = getNewsByCategory(categoriaFiltro)
-  const featuredArticles = newsFiltrate.filter((articolo) => articolo.featured)
+  const [categorie, setCategorie] = useState<string[]>([])
+  const [newsFiltrate, setNewsFiltrate] = useState<NewsArticle[]>([])
+  const featuredArticles = newsFiltrate.filter(article => article.featured)
+
+
+  useEffect(() => {
+    async function fetchCategories() {
+      const response = await fetch("/api/news");
+      const data: NewsArticle[] = await response.json();
+      const categories = ["Tutte", ...new Set(data.map((article) => article.categoria))];
+      setCategorie(categories);
+      const filteredNews = categoriaFiltro === "Tutte" ? data : data.filter((article) => article.categoria === categoriaFiltro);
+      setNewsFiltrate(filteredNews);
+    }
+
+    fetchCategories();
+  }, [categoriaFiltro]);
 
   const formatData = (dataString: string) => {
     const data = new Date(dataString)
@@ -76,7 +90,7 @@ export default function NewsPage() {
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                     <div className="relative">
                       <img
-                        src={"https://volleyballsanmartino.it/images/" + featuredArticle.immagine || "/placeholder.svg"}
+                        src={"/images/" + featuredArticle.immagine || "/placeholder.svg"}
                         alt={featuredArticle.titolo}
                         className="w-full h-64 lg:h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
@@ -129,7 +143,7 @@ export default function NewsPage() {
                 <Link href={`/news/${articolo.slug}`}>
                   <div className="relative overflow-hidden rounded-t-lg">
                     <img
-                      src={articolo.immagine || "/placeholder.svg"}
+                      src={"/images/" + articolo.immagine || "/placeholder.svg"}
                       alt={articolo.titolo}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />

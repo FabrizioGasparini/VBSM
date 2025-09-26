@@ -12,39 +12,22 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import { MapPin, Phone, Mail, Clock, Users, MessageSquare, Calendar, Dumbbell, School2, School } from "lucide-react"
+import { te } from "date-fns/locale"
 
 const contatti = [
   {
     tipo: "Presidente",
     nome: "Roberto Intonti",
-    telefono: "+39 0123 456792",
-    email: "presidente@volleysanmartino.it",
-    orari: "Su appuntamento",
+    telefono: "+39 3534862102",
+    email: "vbsmcampionati@volleysanmartino.it",
     icona: Calendar,
   },
   {
-    tipo: "Segreteria Generale",
-    nome: "Anna Verdi",
-    telefono: "+39 0123 456789",
-    email: "segreteria@volleysanmartino.it",
-    orari: "Lun-Ven: 18:00-20:00",
-    icona: Phone,
-  },
-  {
-    tipo: "Settore Giovanile",
-    nome: "Marco Bianchi",
-    telefono: "+39 0123 456790",
-    email: "giovanile@volleysanmartino.it",
-    orari: "Mar-Gio: 17:00-19:00",
     icona: Users,
-  },
-  {
-    tipo: "Squadre Senior",
-    nome: "Elena Rossi",
-    telefono: "+39 0123 456791",
-    email: "senior@volleysanmartino.it",
-    orari: "Lun-Mer-Ven: 19:00-21:00",
-    icona: MessageSquare,
+    tipo: "Segreteria",
+    nome: "Rosanna Foglia",
+    email: "vbsm@libero.it",
+    orari: "Lun: 18.30 - 20.30",
   },
 ]
 
@@ -68,8 +51,17 @@ export default function ContattiPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log("Form submitted:", formData)
+    // iniva la mail con i dati
+    console.log("Form Data:", formData)
+    // resetta il form
+    setFormData({
+      nome: "",
+      email: "",
+      telefono: "",
+      oggetto: "",
+      messaggio: "",
+    })
+    alert("Messaggio inviato! Ti risponderemo il prima possibile.")
   }
 
   return (
@@ -95,28 +87,36 @@ export default function ContattiPage() {
             <h2 className="font-ethnocentric text-3xl lg:text-4xl mb-4 text-primary">COME RAGGIUNGERCI</h2>
             <p className="text-lg text-muted-foreground">Scegli il contatto più adatto alle tue esigenze</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="flex flex-col md:flex-row gap-8 md:gap-6 justify-center">
             {contatti.map((contatto, index) => (
-              <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 min-w-[350px] ">
                 <CardHeader className="text-center">
-                  <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-3">
-                    <contatto.icona className="h-6 w-6 text-primary" />
-                  </div>
+                  {
+                    contatto.icona &&
+                    <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-3">
+                      <contatto.icona className="h-6 w-6 text-primary" />
+                    </div>
+                  }
                   <CardTitle className="text-lg">{contatto.tipo}</CardTitle>
                   <CardDescription className="font-medium">{contatto.nome}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <Phone className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm">{contatto.telefono}</span>
-                  </div>
+                  {
+                    contatto.telefono &&
+                    <div className="flex items-center space-x-2">
+                      <Phone className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-sm">{contatto.telefono}</span>
+                    </div>
+                  }
+                  {
+                    contatto.orari &&
+                    <div className="flex items-center space-x-2">
+                      <Clock className="h-4 w-4 text-muted-foreground" />
+                      <span className="text-sm">{contatto.orari}</span>
+                    </div>}
                   <div className="flex items-center space-x-2">
                     <Mail className="h-4 w-4 text-muted-foreground" />
                     <span className="text-sm break-all">{contatto.email}</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Clock className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-sm">{contatto.orari}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -178,7 +178,7 @@ export default function ContattiPage() {
                     <Label htmlFor="oggetto">Oggetto *</Label>
                     <Select value={formData.oggetto} onValueChange={handleSelectChange} >
                       <SelectTrigger className="bg-secondary w-full">
-                        <SelectValue placeholder="Seleziona l'oggetto"  />
+                        <SelectValue placeholder="Seleziona l'oggetto" />
                       </SelectTrigger>
                       <SelectContent className="bg-secondary">
                         <SelectItem value="informazioni-generali">Informazioni Generali</SelectItem>
@@ -242,7 +242,7 @@ export default function ContattiPage() {
                 </Button>
               </CardContent>
             </Card>
-           
+
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">

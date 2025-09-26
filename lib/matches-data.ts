@@ -14,7 +14,7 @@ export interface Match {
     note?: string;
 }
 
-export const partite: Match[] = await fetch("https://www.volleyballsanmartino.it/api/matches.php")
+export const partite: Match[] = await fetch("https://www.volleyballsanmartino.it/api/matches")
     .then((res) => res.json())
     .then((data) => data as Match[]);
 

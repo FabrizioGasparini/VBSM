@@ -1,14 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    async rewrites() {
-        return [
-            {
-                source: '/api/:path*',
-                destination: 'https://volleyballsanmartino.it/:path*', 
-            },
-        ];
-    },
-    skipMiddlewareUrlNormalize: true,
-};
+const nextConfig = {};
 
 export default nextConfig;

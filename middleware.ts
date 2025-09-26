@@ -6,7 +6,7 @@ export function middleware(req: NextRequest) {
     // recupera il token dai cookie
     const token = req.cookies.get("token")?.value;
 
-    if (req.nextUrl.pathname.startsWith("/nextapi")) {
+    if (req.nextUrl.pathname.startsWith("/api")) {
         return;
     }
 
@@ -23,5 +23,5 @@ export function middleware(req: NextRequest) {
 
 // tutti i percorsi che devono essere protetti tranne /api/*
 export const config = {
-    matcher: ["/", "/((?!api|nextapi|_next/static|_next/image|favicon.ico).*)"],
+    matcher: ["/", "/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

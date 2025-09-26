@@ -104,11 +104,11 @@ export function ImageUpload({ value, onChange, label = "Immagine" }: ImageUpload
       {value && (
         <div className="space-y-2">
           <Label className="text-sm text-muted-foreground">Anteprima</Label>
-          <div className="relative w-full h-48 border rounded-lg overflow-hidden bg-muted">
+          <div className="relative h-fit max-h-48 border rounded-lg overflow-hidden bg-muted">
             <img
-              src={value || "/placeholder.svg"}
+              src={"/images/" + value || "/placeholder.svg"}
               alt="Anteprima"
-              className="w-full h-full object-cover"
+              className="h-full h-auto object-cover"
               onError={(e) => {
                 const target = e.target as HTMLImageElement
                 target.src = "/placeholder.svg?height=200&width=400&text=Immagine non trovata"
