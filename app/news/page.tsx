@@ -48,7 +48,7 @@ export default function NewsPage() {
       <section className="bg-primary text-primary-foreground py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="font-ethnocentric text-4xl lg:text-5xl mb-4">NEWS & AGGIORNAMENTI</h1>
+            <h1 className="font-ethnocentric text-3xl md:text-4xl lg:text-5xl mb-4">NEWS & AGGIORNAMENTI</h1>
             <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto text-pretty">
               Resta sempre aggiornato su tutte le novità, i risultati e gli eventi della Volleyball San Martino
             </p>

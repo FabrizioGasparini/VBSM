@@ -3,6 +3,7 @@ import pool from '../../../lib/db'; // Assicurati che lib/db.ts esista
 import { Team } from '@/lib/teams-data';
 import { cookies } from 'next/headers';
 import { isAuthenticated } from '@/lib/auth';
+import { te } from 'date-fns/locale';
 
 export async function GET(req: NextRequest) {
   try {

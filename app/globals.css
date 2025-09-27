@@ -128,6 +128,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    width: 100vw;
   }
 
   /* Custom font classes for volleyball branding */
@@ -173,35 +174,34 @@
   }
 
   .scrollbar::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-  scrollbar-gutter: stable; 
-}
+    width: 8px;
+    height: 8px;
+    scrollbar-gutter: stable; 
+  }
 
-.scrollbar::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05); /* semi-trasparente */
-  backdrop-filter: blur(8px);
-  border-radius: 9999px;
-  scrollbar-gutter: stable; 
-}
+  .scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05); /* semi-trasparente */
+    backdrop-filter: blur(8px);
+    border-radius: 9999px;
+    scrollbar-gutter: stable; 
+  }
 
-.scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2); /* glass effect */
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(12px);
-  transition: background 0.3s;
-  scrollbar-gutter: stable; 
-}
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2); /* glass effect */
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    transition: background 0.3s;
+    scrollbar-gutter: stable; 
+  }
 
-.scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.35);
-  scrollbar-gutter: stable; 
-}
-.scrollbar {
-  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.05);
-  scrollbar-width: thin;
-  scrollbar-gutter: stable; 
-}
-
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.35);
+    scrollbar-gutter: stable; 
+  }
+  .scrollbar {
+    scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.05);
+    scrollbar-width: thin;
+    scrollbar-gutter: stable; 
+  }
 }

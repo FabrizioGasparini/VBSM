@@ -13,17 +13,17 @@ const navigationItems = [
   { name: "News", href: "/news" },
   { name: "Allenamenti", href: "/allenamenti" },
   { name: "Chi Siamo", href: "/chi-siamo" },
-  { name: "Sponsor", href: "/sponsor" },
+  //{ name: "Sponsor", href: "/sponsor" },
   { name: "Contatti", href: "/contatti" },
-  { name: "Area Allenatori", href: "/allenatori" },
+  //{ name: "Area Allenatori", href: "/allenatori" },
 ]
 
-export function Navigation({background}: {background?: string}) {
+export function Navigation({ background }: { background?: string }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
     <nav className={`sticky pt-3 z-50 w-full ${background ? background : "bg-primary"}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px- w-fit bg-card border border-border lg:rounded-full shadow-lg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 w-fit lg:bg-card bg-transparent lg:border border-border lg:rounded-full lg:shadow-lg">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
@@ -53,20 +53,35 @@ export function Navigation({background}: {background?: string}) {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-card border-t border-border">
-              {navigationItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="block px-3 py-2 text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors duration-200"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
+          <>
+            <style>{`body { overflow: hidden !important; }`}</style>
+            <div className="lg:hidden fixed inset-0 z-50 flex justify-end bg-background/80">
+              <div className="flex-1" onClick={() => setIsOpen(false)} />
+              <div className="w-60 bg-card border-l border-border h-full flex flex-col py-8 px-6 shadow-2xl rounded-l-3xl animate-slide-in-right">
+                <div className="flex justify-end mb-8">
+                  <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} aria-label="Close menu" className="text-foreground hover:text-primary">
+                    <X className="h-7 w-7" />
+                  </Button>
+                </div>
+                <nav className="flex flex-col gap-0">
+                  {navigationItems.map((item, idx) => (
+                    <div key={item.name}>
+                      <Link
+                        href={item.href}
+                        className="block px-5 py-3 rounded-xl text-lg font-semibold text-card-foreground hover:text-primary hover:bg-muted transition-colors duration-200 text-right"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                      {idx < navigationItems.length - 1 && (
+                        <hr className="border-t border-border my-1" />
+                      )}
+                    </div>
+                  ))}
+                </nav>
+              </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </nav>

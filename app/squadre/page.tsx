@@ -51,7 +51,7 @@ export default function SquadrePage() {
                   <div>
                     <p className="text-sm font-medium mb-2">Staff Tecnico:</p>
                     <div className="space-y-1">
-                      {squadra.coaches.map((allenatore, idx) => (
+                      {squadra.coaches.sort((a, b) => b.ruolo!.localeCompare(a.ruolo!)).map((allenatore, idx) => (
                         <p key={idx} className="text-sm text-muted-foreground">
                           {allenatore.nome} {allenatore.cognome} - {allenatore.ruolo}
                         </p>

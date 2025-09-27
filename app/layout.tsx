@@ -8,9 +8,12 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   title: "Volleyball San Martino - Società Sportiva",
-  description:
-    "Sito ufficiale della società sportiva Volleyball San Martino. Scopri le nostre squadre, calendari, news e molto altro.",
-  generator: "v0.app",
+  description: "Sito ufficiale della società sportiva Volleyball San Martino. Scopri le nostre squadre, calendari, news e molto altro.",
+  icons: {
+    icon: "/images/loghi/main.png",
+    shortcut: "/images/loghi/main.png",
+    apple: "/images/loghi/main.png",
+  },
   keywords: "volleyball, pallavolo, San Martino, sport, squadre, tornei",
 }
 
@@ -21,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it">
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
+      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased min-w-screen overflow-x-hidden`}>
         <Suspense fallback={null}>{children}</Suspense>
       </body>
     </html>

@@ -69,22 +69,22 @@ export function Footer() {
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4" />
-                <span>+39 3534862102</span>
+                <a href="tel:+393534862102" className="underline underline-offset-3"><span className="">+39</span>3534862102</a>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
-                <span>vbsmcampionati@gmail.com</span>
+                <a href="mailto:vbsmcampionati@gmail.com" className="underline underline-offset-3">vbsmcampionati@gmail.com</a>
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
-                <span>Piazza V. Carnevali, 1<br />42018 San Martino In Rio RE</span>
+                <a href="https://maps.app.goo.gl/UgC7gkjFung7YARU6" target="_blank" className="underline underline-offset-3">Piazza V. Carnevali, 1<br />42018 San Martino In Rio RE</a>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-volleyball-coral/20 mt-8 pt-8 text-center">
-          <p>&copy; 2025 Volleyball San Martino. Tutti i diritti riservati.</p>
+        <div className="border-t border-volleyball-coral/20 mt-8 pt-8 text-center text-sm text-secondary-foreground/80 md:text-md">
+          <p>&copy; 2025 Volleyball San Martino. Tutti i diritti riservati. <br /> Sito realizzato da <a href="https://www.instagram.com/fabri.gaspa_/" className="text-volleyball-coral underline hover:text-primary underline-offset-3">Fabrizio Gasparini</a></p>
         </div>
       </div>
     </footer>

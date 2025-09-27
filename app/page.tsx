@@ -11,7 +11,7 @@ export default async function HomePage() {
   const latestNews = await getLatestNews(3)
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen min-w-screen">
       <Navigation background="bg-transparent" />
 
       {/* Hero Section */}
@@ -22,7 +22,7 @@ export default async function HomePage() {
           <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-primary/5 rounded-full blur-md animate-bounce" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:py-20 md:py-10 py-5 lg:py-28">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-left space-y-8">
               <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-4">
@@ -31,7 +31,7 @@ export default async function HomePage() {
               </div>
 
               <div className="space-y-6">
-                <h1 className="font-ethnocentric text-4xl lg:text-7xl text-foreground leading-tight">
+                <h1 className="font-ethnocentric text-3xl md:text-5xl lg:text-7xl text-foreground leading-tight">
                   <span className="block">VOLLEYBALL</span>
                   <span className="block text-primary animate-pulse">SAN MARTINO</span>
                 </h1>
@@ -144,10 +144,10 @@ export default async function HomePage() {
               <div className="w-2 h-2 bg-primary rounded-full animate-bounce" />
             </div>
 
-            <h2 className="font-ethnocentric text-5xl lg:text-7xl mb-6 bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
+            <h2 className="font-ethnocentric text-3xl md:text-5xl lg:text-7xl mb-6 bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
               BREAKING NEWS
             </h2>
-            <p className="text-2xl lg:text-3xl text-muted-foreground max-w-3xl mx-auto text-pretty font-medium leading-relaxed">
+            <p className="text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-3xl mx-auto text-pretty font-medium leading-relaxed">
               🚨 Non perdere le <span className="text-primary font-bold">ultime notizie</span>, risultati esplosivi e
               aggiornamenti esclusivi dal Volleyball San Martino
             </p>
@@ -207,7 +207,6 @@ export default async function HomePage() {
 
                   <CardContent className="pt-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground font-medium">✍️ {article.autore}</span>
                       <div className="flex items-center gap-2 text-primary group-hover:translate-x-2 transition-transform">
                         <span className="text-sm font-semibold">Leggi tutto</span>
                         <ArrowRight className="h-5 w-5" />
@@ -228,12 +227,12 @@ export default async function HomePage() {
                 asChild
               >
                 <Link href="/news">
-                  <Zap className="mr-3 h-6 w-6 animate-pulse" />🚀 Scopri Tutte le News Esplosive
+                  <Zap className="mr-3 h-6 w-6 animate-pulse" />🚀 Scopri Tutte le News
                   <ArrowRight className="ml-3 h-6 w-6" />
                 </Link>
               </Button>
               <div className="text-sm text-muted-foreground">
-                ⭐ Aggiornamenti quotidiani • 📱 Sempre fresh • 🏆 Risultati in tempo reale
+                Aggiornamenti su partite, eventi e molto altro!
               </div>
             </div>
           </div>
@@ -299,7 +298,7 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="font-ethnocentric text-3xl lg:text-4xl mb-6 text-primary">CHI SIAMO</h2>
+              <h2 className="font-ethnocentric text-3xl lg:text-4xl mb-6 text-primary text-center lg:text-left">CHI SIAMO</h2>
               <p className="text-lg mb-6 text-pretty leading-relaxed">
                 Il Volleyball San Martino è una società sportiva fondata nel 1984 con la missione di promuovere i valori
                 del volleyball attraverso la formazione di giovani atleti e la partecipazione a competizioni di alto

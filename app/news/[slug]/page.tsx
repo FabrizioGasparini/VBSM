@@ -16,8 +16,6 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
   const { slug } = await params
   const article = await getNewsBySlug(slug)
 
-  console.log("Article slug:", article)
-
   if (!article) {
     notFound()
   }
@@ -33,6 +31,127 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
       month: "long",
       day: "numeric",
     })
+  }
+
+  const renderInline = (text: string): React.ReactNode => {
+    const parts: React.ReactNode[] = []
+    const regex = /!\[([^\]]*)\]\(([^)]+)\)/g
+    let lastIndex = 0
+    let match: RegExpExecArray | null
+    let idx = 0
+    while ((match = regex.exec(text)) !== null) {
+      const before = text.slice(lastIndex, match.index)
+      if (before) parts.push(renderSimpleFormatting(before, `t-before-${idx}`))
+      const alt = match[1]
+      const url = match[2]
+      parts.push(
+        <img
+          key={`inline-img-${idx}`}
+          src={url}
+          alt={alt}
+          className="inline-block max-h-40 rounded ml-1 mr-1 align-middle"
+        />
+      )
+      lastIndex = regex.lastIndex
+      idx++
+    }
+    const rest = text.slice(lastIndex)
+    if (rest) parts.push(renderSimpleFormatting(rest, `t-rest-${idx}`))
+    return <>{parts}</>
+  }
+
+  const renderSimpleFormatting = (txt: string, keyPrefix: string) => {
+    const tokens: React.ReactNode[] = []
+    let pos = 0
+    let idx = 0
+    const combinedRegex = /(\*\*_(.+?)_\*\*)|(\*{2}(.+?)\*{2})|(_(.+?)_)/g
+    let match: RegExpExecArray | null
+    while ((match = combinedRegex.exec(txt)) !== null) {
+      const before = txt.slice(pos, match.index)
+      if (before) tokens.push(<span key={`${keyPrefix}-${idx}-before`}>{before}</span>)
+      if (match[1]) {
+        tokens.push(<strong key={`${keyPrefix}-${idx}-b`}><em>{match[2]}</em></strong>)
+      } else if (match[3]) {
+        tokens.push(<strong key={`${keyPrefix}-${idx}-b`}>{match[4]}</strong>)
+      } else if (match[5]) {
+        tokens.push(<em key={`${keyPrefix}-${idx}-i`}>{match[6]}</em>)
+      }
+      pos = combinedRegex.lastIndex
+      idx++
+    }
+    const tail = txt.slice(pos)
+    if (tail) tokens.push(<span key={`${keyPrefix}-tail`}>{tail}</span>)
+    return <span key={`${keyPrefix}-container`}>{tokens}</span>
+  }
+
+  const renderContent = (raw: string) => {
+    const lines = raw.replace("\r", "").split(/\r?\n/)
+    const elements: React.ReactNode[] = []
+    let inCode = false
+    let codeBuffer: string[] = []
+
+    lines.forEach((line, i) => {
+      if (line.trim().startsWith("```")) {
+        if (!inCode) {
+          inCode = true
+          codeBuffer = []
+        } else {
+          inCode = false
+          elements.push(
+            <pre key={`code-${i}`} className="bg-muted p-3 rounded overflow-x-auto text-sm">
+              <code>{codeBuffer.join("\n")}</code>
+            </pre>
+          )
+        }
+        return
+      }
+      if (inCode) {
+        codeBuffer.push(line)
+        return
+      }
+
+      if (line.startsWith("# ")) {
+        elements.push(<h1 key={i} className="text-3xl font-bold mt-6 mb-4">{line.replace(/^#\s+/, "")}</h1>)
+        return
+      }
+      if (line.startsWith("## ")) {
+        elements.push(<h2 key={i} className="text-2xl font-semibold mt-4 mb-2">{line.replace(/^##\s+/, "")}</h2>)
+        return
+      }
+
+      if (line.trim().startsWith("- ")) {
+        const items = []
+        let j = i
+        while (j < lines.length && lines[j].trim().startsWith("- ")) {
+          items.push(lines[j].trim().replace(/^-+\s*/, ""))
+          j++
+        }
+        elements.push(
+          <ul key={`ul-${i}`} className="list-disc pl-6 mb-3">
+            {items.map((it, idx) => <li key={idx}>{renderInline(it)}</li>)}
+          </ul>
+        )
+        return
+      }
+
+      const imgMatch = line.match(/^!\[([^\]]*)\]\(([^)]+)\)\s*$/)
+      if (imgMatch) {
+        elements.push(
+          <div key={`img-${i}`} className="my-6">
+            <img src={imgMatch[2]} alt={imgMatch[1]} className="w-full rounded-lg shadow-lg" />
+          </div>
+        )
+        return
+      }
+
+      if (line.trim() === "") {
+        elements.push(<div key={`br-${i}`} className="h-2" />)
+      } else {
+        elements.push(<p key={`p-${i}`} className="text-pretty">{renderInline(line)}</p>)
+      }
+    })
+
+    return elements
   }
 
   return (
@@ -87,63 +206,11 @@ export default async function NewsArticlePage({ params }: NewsArticlePageProps) 
 
           {/* Article Content */}
           <div className="prose prose-lg max-w-none">
-            <p className="text-xl text-muted-foreground mb-8 font-medium text-pretty">{article.estratto}</p>
-
+            <p className="text-xl text-muted-foreground mb-8 font-medium text-pretty">
+              {article.estratto}
+            </p>
             <div className="text-foreground leading-relaxed space-y-6">
-              {article.contenuto.replace("\r", "").split("\n").map((paragraph, index) => {
-                paragraph = paragraph.trim();
-
-                if (paragraph === "") return null;
-
-                if (/\*\*(.*?)\*\*/.test(paragraph)) {
-                  const parts = paragraph.split(/(\*\*.*?\*\*)/g);
-                  return (
-                    <p key={index} className="text-pretty">
-                      {parts.map((part, partIndex) => {
-                        if (part.startsWith("**") && part.endsWith("**")) {
-                          return (
-                            <strong key={partIndex} className="text-xl font-semibold text-primary mt-8 mb-4">
-                              {part.slice(2, -2)}
-                            </strong>
-                          );
-                        }
-                        return part;
-                      })}
-                    </p>
-                  );
-                }
-
-
-                if (paragraph.startsWith("- ")) {
-                  const listItems = paragraph.split("\n").filter((item) => item.startsWith("- "))
-                  return (
-                    <ul key={index} className="list-disc list-inside space-y-2 ml-4">
-                      {listItems.map((item, itemIndex) => (
-                        <li key={itemIndex}>{item.substring(2)}</li>
-                      ))}
-                    </ul>
-                  );
-                }
-
-                if (/\!\[.*?\]\(.*?\)/.test(paragraph)) {
-                  const imgMatch = paragraph.match(/\!\[(.*?)\]\((.*?)\)/);
-                  if (imgMatch) {
-                    const altText = imgMatch[1];
-                    const url = imgMatch[2];
-                    return (
-                      <div key={index} className="my-8">
-                        <img src={"/images/" + url} alt={altText} className="w-full rounded-lg shadow-lg" />
-                      </div>
-                    );
-                  }
-                }
-
-                return (
-                  <p key={index} className="text-pretty">
-                    {paragraph}
-                  </p>
-                )
-              })}
+              {renderContent(article.contenuto || "")}
             </div>
           </div>
         </div>

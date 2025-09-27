@@ -58,13 +58,13 @@ export default function CalendarioCustomPage() {
     return eventiFiltrati.filter(ev => new Date(ev.data).toISOString().slice(0, 10) === giorno.toISOString().slice(0, 10))
   }
 
-  const formatGiorno = (d: Date) => d.getDate()
+  const formatGiorno = (d: Date) => d.toLocaleDateString("it-IT", { day: "numeric", month: "short" }).replace(/\s/g, " ")
 
   return (
     <div className="min-h-screen">
       <Navigation />
 
-      <section className="bg-gradient-to-r from-primary via-primary/90 to-primary text-primary-foreground py-20">
+      <section className="bg-primary text-primary-foreground py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-ethnocentric text-4xl lg:text-6xl mb-6">CALENDARIO EVENTI</h1>
           <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto text-pretty mb-8">
@@ -74,17 +74,15 @@ export default function CalendarioCustomPage() {
       </section>
 
       <section className="py-8 bg-background border-b">
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-4">
             <Calendar className="h-6 w-6 text-primary" />
             <h2 className="text-2xl font-semibold">Calendario Eventi</h2>
           </div>
-
           <div className="flex items-center space-x-4">
             <span className="text-sm font-medium">Filtra per palestra:</span>
             <Select value={palestraFiltro} onValueChange={setPalestraFiltro}>
-              <SelectTrigger className="w-56">
+              <SelectTrigger className="w-40 sm:w-56">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -97,13 +95,13 @@ export default function CalendarioCustomPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-background">
+      <section className="py-8 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           {/* Form per aggiungere evento */}
           <Card className="mb-8">
-            <CardContent className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
+            <CardContent className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 items-end">
               <Select value={formData.squadra} onValueChange={(val) => setFormData({ ...formData, squadra: val })}>
-                <SelectTrigger className="w-full md:w-auto bg-secondary p-2">
+                <SelectTrigger className="w-full bg-secondary p-2">
                   <SelectValue placeholder="Seleziona Squadra" />
                 </SelectTrigger>
                 <SelectContent>
@@ -113,7 +111,7 @@ export default function CalendarioCustomPage() {
                 </SelectContent>
               </Select>
               <Select value={formData.palestra} onValueChange={(val) => setFormData({ ...formData, palestra: val })}>
-                <SelectTrigger className="w-full md:w-auto bg-secondary ">
+                <SelectTrigger className="w-full bg-secondary">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -126,41 +124,39 @@ export default function CalendarioCustomPage() {
                 type="date"
                 value={formData.data}
                 onChange={(e) => setFormData({ ...formData, data: e.target.value })}
-                className="border rounded p-2 bg-secondary h-full"
+                className="border rounded p-2 bg-secondary h-full w-full"
               />
               <input
                 type="time"
                 value={formData.ora}
                 onChange={(e) => setFormData({ ...formData, ora: e.target.value })}
-                className="border rounded p-2 bg-secondary"
+                className="border rounded p-2 bg-secondary w-full"
               />
-              <Button onClick={() => { }} className="col-span-1 md:col-span-1">Aggiungi Evento</Button>
+              <Button onClick={() => { }} className="w-full md:w-auto">Aggiungi Evento</Button>
             </CardContent>
           </Card>
         </div>
       </section>
 
       {/* Calendario */}
-      <div className="flex items-center gap-2 w-full justify-center">
-        <Button className="text-xs" onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1))}>
-          {"<"} Mese Precedente
+      <div className="flex flex-row items-center gap-2 w-full justify-center">
+        <Button className="text-xs bg-transparent" onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1))}>
+          <span>{"<"}</span>
         </Button>
-        <span className="font-semibold text-2xl px-10">{currentMonth.toLocaleString("it-IT", { month: "long", year: "numeric" }).toUpperCase()}</span>
-        <Button className="text-xs" onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1))}>
-          Mese Successivo {">"}
+        <span className="font-semibold text-xl sm:text-2xl px-0 sm:px-10 text-center">{currentMonth.toLocaleString("it-IT", { month: "long", year: "numeric" }).toUpperCase()}</span>
+        <Button className="text-xs bg-transparent" onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1))}>
+          <span >{">"}</span>
         </Button>
       </div>
       <section className="py-8 bg-background">
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-7 gap-2">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2">
           {["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"].map(d => (
-            <div key={d} className="text-center font-semibold">{d}</div>
+            <div key={d} className="text-center font-semibold hidden md:block">{d}</div>
           ))}
-
-          {days.map(giorno => (
-            <div key={giorno.toISOString()} className="border rounded-lg p-2 min-h-[8px] relative">
+          {/* Mobile: giorni della settimana sopra ogni giorno */}
+          {days.map((giorno, idx) => (
+            <div key={giorno.toISOString()} className={`border rounded-lg p-2 min-h-[8px] relative md:block ${eventiDelGiorno(giorno).length == 0 ? "hidden" : "block"}`}>
               <span className="font-bold">{formatGiorno(giorno)}</span>
-
               <div className="mt-1 space-y-1">
                 {eventiDelGiorno(giorno).map(ev => (
                   <Card key={ev.id} className="border-l-4 border-l-primary bg-primary/10 hover:shadow-lg p-2">
@@ -176,9 +172,9 @@ export default function CalendarioCustomPage() {
             </div>
           ))}
         </div>
-      </section>
+      </section >
 
       <Footer />
-    </div>
+    </div >
   )
 }

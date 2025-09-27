@@ -460,6 +460,20 @@ export default function AdminNewsPage() {
     return res
   }
 
+  const uploadFile = async (file: File): Promise<string> => {
+    const formData = new FormData()
+    formData.append("file", file)
+
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    })
+
+    if (!res.ok) throw new Error("Upload fallito")
+    const data = await res.json()
+    return data.url as string
+  }
+
   // render principale
   if (isCreating || editingArticle) {
     return (
@@ -556,20 +570,30 @@ export default function AdminNewsPage() {
                       }}>
                         <ImageIcon className="mr-1 h-4 w-4" />Immagine Inline
                       </Button>
-                      <Button size="sm" variant="outline" onClick={() => {
-                        // carica file e inseriscine objectURL inline
-                        if (!fileInputRef.current) return
-                        fileInputRef.current.onchange = (e) => {
-                          const f = (e.target as HTMLInputElement).files
-                          if (!f || f.length === 0) return
-                          const file = f[0]
-                          const url = URL.createObjectURL(file)
-                          insertAtCursor(`\n![${file.name}](${url})\n`)
-                          // reset onchange
-                          fileInputRef.current!.onchange = (ev) => handleFileSelected(ev as unknown as React.ChangeEvent<HTMLInputElement>)
-                        }
-                        fileInputRef.current.click()
-                      }}>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => {
+                          if (!fileInputRef.current) return
+                          fileInputRef.current.onchange = async (e) => {
+                            const f = (e.target as HTMLInputElement).files
+                            if (!f || f.length === 0) return
+                            const file = f[0]
+
+                            try {
+                              const url = await uploadFile(file)
+                              insertAtCursor(`\n![${file.name}](/images/${url})\n`)
+                            } catch (err) {
+                              console.error("Errore upload:", err)
+                              alert("Errore durante l'upload dell'immagine")
+                            }
+
+                            fileInputRef.current!.onchange = (ev) =>
+                              handleFileSelected(ev as unknown as React.ChangeEvent<HTMLInputElement>)
+                          }
+                          fileInputRef.current.click()
+                        }}
+                      >
                         <ImageIcon className="mr-1 h-4 w-4" />Carica e Inserisci
                       </Button>
                     </div>
